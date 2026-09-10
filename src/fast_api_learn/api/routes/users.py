@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 
 from fast_api_learn.schemas.user import UserCreate
 
@@ -25,7 +25,10 @@ async def get_user(user_id: int):
     }
 
 
-@router.post("/")
+@router.post(
+        "/",
+        status_code=status.HTTP_201_CREATED,
+    )
 async def create_user(user: UserCreate):
     return {
         "message": "User created",
