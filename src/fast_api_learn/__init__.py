@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from fast-api-learn!")
+# src/fast_api_learn/__init__.py
