@@ -1,5 +1,7 @@
-from fastapi import HTTPException, status
-
+from fast_api_learn.exceptions.user import (
+    UserEmailAlreadyExistsError,
+    UserNotFoundError,
+)
 from fast_api_learn.schemas.user import UserCreate
 
 
@@ -18,19 +20,13 @@ def get_user_by_id(user_id: int):
         if user["id"] == user_id:
             return user
 
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail="User not found",
-    )
+    raise UserNotFoundError()
 
 
 def create_user(user: UserCreate):
     for existing_user in users:
         if existing_user["email"] == user.email:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail="Email already exists",
-            )
+            raise UserEmailAlreadyExistsError()
 
     new_user = {
         "id": len(users) + 1,
@@ -46,5 +42,4 @@ def create_user(user: UserCreate):
 
 def delete_user(user_id: int):
     user = get_user_by_id(user_id)
-
     users.remove(user)
