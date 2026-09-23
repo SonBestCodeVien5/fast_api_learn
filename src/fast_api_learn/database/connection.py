@@ -1,11 +1,16 @@
-import psycopg
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 from fast_api_learn.core.config import settings
 
 
-def test_connection():
-    with psycopg.connect(settings.database_url) as connection:
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT 1")
-            result = cursor.fetchone()
+engine = create_engine(
+    settings.database_url,
+)
 
-    return result
+
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+)
