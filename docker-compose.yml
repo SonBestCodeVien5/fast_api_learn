@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: fast_api_learn_postgres
+    environment:
+      POSTGRES_USER: fastapi
+      POSTGRES_PASSWORD: fastapi
+      POSTGRES_DB: fastapi_learn
+    ports:
+      - "5432:5432"
