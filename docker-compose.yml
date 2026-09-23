@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:17
     container_name: fast_api_learn_postgres
+    restart: always
     environment:
       POSTGRES_USER: fastapi
       POSTGRES_PASSWORD: fastapi
